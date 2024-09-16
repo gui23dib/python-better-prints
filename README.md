@@ -1,6 +1,9 @@
 ## TODO:
-    - instace of user class
     - make detailedPrint usable
-    - test debug mode function
     - implement colors and enum
-    - implement dictionaries correctly
+
+## Setup tools step by step
+    '''
+    pip install setuptools wheel twine
+    py setup.py sdist bdist_wheel
+    '''

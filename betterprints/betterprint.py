@@ -37,7 +37,7 @@ class BetterPrint:
 
     def debug_print(self, *objects, sep=' ', end='\n', flush=False):
         if self.__debugMode == True:
-            self.better_print(*objects, sep=sep, end=end, flush=flush)
+            self.better_print(*objects, sep=sep, end=end, flush=flush, style=self.colorScheme.DEBUG)
 
     def styledprint(
         self, 
