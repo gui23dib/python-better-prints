@@ -15,7 +15,7 @@ if __name__ == '__main__':
     lista = [1, 2, 3, 4, 5]
     tupla = (2, 5, 12, 23, 35)
     tupla2 = (1, 2, 3, 4, 5, 6, 7, 8, 9)
-    tupla3 = ((tupla), 2)
+    tupla3 = ((lista), 2)
     conjunto = {'asd', 2, 3.1323, 'oioi', tupla}
     conjunto2 = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     dicionario = {'a': 1123, 'b': conjunto, 'c': 353, 'd': lista, 'e': 5123}
@@ -23,16 +23,17 @@ if __name__ == '__main__':
 
 
     #debugprint(test, flush=True, sep='\n')
-    debugprint(lista, flush=True, sep='\n')
-    #debugprint(lista, tupla, conjunto, dicionario, "teste", 12312, flush=True, sep='')
-    debugprint(tupla, flush=True, sep='\n')
-    debugprint(tupla3, flush=True, sep='\n')
+    # debugprint(lista, flush=True, sep='\n')
+    # debugprint(lista, tupla, conjunto, dicionario, "teste", 12312, flush=True, sep='')
+    # debugprint(tupla, flush=True, sep='\n')
+    # debugprint(tupla3, flush=True, sep='\n')
 
-    debugprint(conjunto, flush=True)
+    #debugprint(conjunto, flush=True)
     #debugprint(dicionario, flush=True, sep='\n')
 
-    print("teste", "teste")
-    styledprint("Teste", "Teste2", "Teste3", style=Colors.FAIL, flush=True)
-    styledprint(lista, style=Colors.OKGREEN, flush=True)
+    # print("teste", "teste")
+    # styledprint("Teste", "Teste2", "Teste3", style=Colors.FAIL, flush=True)
+    # styledprint(lista, style=Colors.OKGREEN, flush=True)
 
-    
+    betterprint(test, flush=True, sep='')
+

@@ -94,20 +94,21 @@ class BetterPrint:
                 style=style or self.colorScheme.BOLD
             )
             for i in obj: 
-                if type(i) == dict:
+                objtype = type(i)
+                if objtype == dict:
                     for key, value in i.items():
                         self.typespecificprint(None, ident, f"'{key}': {value}", sep=sep, end=end, style=style)
                         # if self.typedicts.get(type(value)) != None:
                         #     self.typespecificprint(None, self.typedicts.get(type(value)), ident, value, sep=sep, end=end)
 
-                elif type(i) in [str, int, float, bool]: 
-                    self.styledprint(ident, f"{self.indentchar}{i},", end=sep, style=style)
+                # elif type(i) in [str, int, float, bool]: 
+                #     self.styledprint(ident, f"{self.indentchar}{i},", end=sep, style=style)
                 else:
-                    if type(i) in [list, tuple, set]:
+                    if objtype in [list, tuple, set]:
                         for j in i:
                             self.typespecificprint(self.typedicts.get(type(j)), j, sep=sep, end=sep, style=style)
                     else:
-                        self.typespecificprint(self.typedicts.get(type(i)), i, sep=sep, end=sep, style=style)
+                        self.typespecificprint(self.typedicts.get(objtype), i, sep=sep, end=sep, style=style)
             self.styledprint(
                 f"{ident}{typeval.structchar[1]}", 
                 style=style or self.colorScheme.BOLD, 
