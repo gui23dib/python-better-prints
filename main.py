@@ -1,4 +1,5 @@
 from functions import *
+from colors import *
 
 if __name__ == '__main__':
     class Test:
@@ -19,9 +20,19 @@ if __name__ == '__main__':
     conjunto2 = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     dicionario = {'a': 1123, 'b': conjunto, 'c': 353, 'd': lista, 'e': 5123}
 
-    #dprint(lista, tupla, conjunto, dicionario, "teste", 12312, flush=True, sep='')
-    #dprint(tupla, flush=True, sep='\n')
-    #dprint(conjunto, flush=True)
-    dprint(dicionario, flush=True, sep='\n')
 
-    #(*objects, sep=' ', end='\n', file=None, flush=False)
+
+    #debugprint(test, flush=True, sep='\n')
+    debugprint(lista, flush=True, sep='\n')
+    #debugprint(lista, tupla, conjunto, dicionario, "teste", 12312, flush=True, sep='')
+    debugprint(tupla, flush=True, sep='\n')
+    debugprint(tupla3, flush=True, sep='\n')
+
+    debugprint(conjunto, flush=True)
+    #debugprint(dicionario, flush=True, sep='\n')
+
+    print("teste", "teste")
+    styledprint("Teste", "Teste2", "Teste3", style=Colors.FAIL, flush=True)
+    styledprint(lista, style=Colors.OKGREEN, flush=True)
+
+    

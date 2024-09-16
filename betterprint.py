@@ -6,6 +6,8 @@ class BetterPrint:
     __debugMode: bool = True
     __detailedPrint: bool = False
     __namedInstances: bool = False
+    namedInstancesLevel: int = 0
+    valueSeparatorCharacter = ','
 
     __indentlevel: int = 0
     indentchar: str = "  "
@@ -28,13 +30,23 @@ class BetterPrint:
         self.__debugMode = isDebugMode or not self.__debugMode
         print(f"{self.colorScheme.WARNING}Debug mode is now {self.__debugMode}{self.colorScheme.ENDC}")
 
+    def better_print(self, *objects, sep=' ', end='\n', flush=False):
+        for obj in objects:
+            self.typedprint(obj, end=sep)
+        print(end=end, flush=flush)
+
     def debug_print(self, *objects, sep=' ', end='\n', flush=False):
         if self.__debugMode == True:
-            for obj in objects:
-                self.typedprint(obj, end=sep)
-            print(end=end, flush=flush)
+            self.better_print(*objects, sep=sep, end=end, flush=flush)
 
-    def styledprint(self, *objects, sep='', end='\n', flush=False, style=None):
+    def styledprint(
+        self, 
+        *objects, 
+        sep='', 
+        end='\n', 
+        flush=False, 
+        style: Colors = None
+    ):
         for obj in objects:
             if style:
                 print(f"{style}{obj}{self.colorScheme.ENDC}", end=sep)
@@ -52,11 +64,12 @@ class BetterPrint:
 
     def typespecificprint(
         self,
-        typeval: TypeSpec = TypeClass.LIST, 
+        typeval: TypeSpec = None, 
         *obj, 
-        sep: str = '', #TODO: Change this to a default value of '\n' if the type is a list
+        sep: str = '',
         end: str = '\n', 
-        flush: bool = False
+        flush: bool = False,
+        style: Colors = None
     ) -> None:
         sep += '\n' if '\n' not in sep else ''
         ident = self.indentchar * self.__indentlevel
@@ -64,48 +77,43 @@ class BetterPrint:
         if(typeval == None): 
             for i in obj:
                 self.styledprint(
-                    ident, f"{i}", 
-                    style=self.colorScheme.OKCYAN
+                    ident, f"{i}{self.valueSeparatorCharacter}",  
+                    style=style or self.colorScheme.OKCYAN
                 )
         else:
             self.__indentlevel += 1
 
-            if self.__namedInstances: self.styledprint(
-                ident, f"Instance of TESTE:", 
-                style=self.colorScheme.BOLD
-            )
+            if self.__namedInstances and (self.namedInstancesLevel + 1) >= self.__indentlevel: 
+                self.styledprint(
+                    ident, f"Instance of {typeval.typename}:", 
+                    style=style or self.colorScheme.UNDERLINE,
+                )
 
             self.styledprint(
                 ident, f"{typeval.structchar[0]}", 
-                style=self.colorScheme.BOLD
+                style=style or self.colorScheme.BOLD
             )
             for i in obj: 
                 if type(i) == dict:
                     for key, value in i.items():
-                        self.typespecificprint(None, ident, f"'{key}': {value}", sep=sep, end=sep)
-                elif type(i) == str:
-                    self.styledprint(ident, f"{self.indentchar}{i},", end=sep)
+                        self.typespecificprint(None, ident, f"'{key}': {value}", sep=sep, end=end, style=style)
+                        # if self.typedicts.get(type(value)) != None:
+                        #     self.typespecificprint(None, self.typedicts.get(type(value)), ident, value, sep=sep, end=end)
+
+                elif type(i) in [str, int, float, bool]: 
+                    self.styledprint(ident, f"{self.indentchar}{i},", end=sep, style=style)
                 else:
-                    for j in i:
-                        if type(j) in [list, tuple, set]:
-                            self.typespecificprint(TypeClass.TUPLE, j, sep=sep, end=sep)
+                    if type(i) in [list, tuple, set]:
+                        for j in i:
+                            self.typespecificprint(self.typedicts.get(type(j)), j, sep=sep, end=sep, style=style)
+                    else:
+                        self.typespecificprint(self.typedicts.get(type(i)), i, sep=sep, end=sep, style=style)
             self.styledprint(
                 f"{ident}{typeval.structchar[1]}", 
-                style=self.colorScheme.BOLD, 
+                style=style or self.colorScheme.BOLD, 
                 sep=sep,
                 end=end, 
                 flush=flush
             )
             
             self.__indentlevel -= 1
-            # if type(obj) == dict:
-            #     if self.__namedInstances: self.styledprint("Instance of dict:", style=self.colorScheme.BOLD)
-            #     self.styledprint("{", style=self.colorScheme.BOLD)
-            #     for key, value in obj.items():
-            #         self.typedprint(f"  '{key}': {value},", end=sep)
-            #     self.styledprint(f"{set_nl(sep)}", "}", style=self.colorScheme.BOLD, end=end, flush=flush)
-
-    # def betterprint(self, *objects, sep='', end='\n', flush=False):
-    #     for obj in objects:
-    #         self.typedprint(obj, end=sep)
-    #     print(end=end, flush=flush)
