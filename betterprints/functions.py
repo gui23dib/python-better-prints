@@ -1,7 +1,7 @@
-from betterprint import BetterPrint as bp
+from .config import betterprintconfig
 
-betterprintconfig = bp()
-colors = betterprintconfig.colorScheme
+def hello():
+    print('Hello World! thanks for using betterprints!')
 
 def debugprint(*objects, sep=' ', end='\n', flush=False):
     betterprintconfig.debug_print(*objects, sep=sep, end=end, flush=flush)

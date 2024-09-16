@@ -1,8 +1,8 @@
 from typing import Optional, Type, TypeVar
-from colors import Colors
-from typeclasses import TypeSpec, TypeClass, TypeDict
+from .colors import Colors
+from .typeclasses import TypeSpec, TypeClass, TypeDict
 
-class BetterPrint:
+class BetterPrintClass:
     __debugMode: bool = True
     __detailedPrint: bool = False
     __namedInstances: bool = False
@@ -158,6 +158,3 @@ class BetterPrint:
             )
             
             self.__indentlevel -= 1
-
-    def __str__(self):
-        return f"BetterPrint({self.colorScheme})"
