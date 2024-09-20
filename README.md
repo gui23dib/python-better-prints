@@ -11,4 +11,8 @@
 
 ## DISCLAIMER
 
-This package is an experimental package made from a student, it is not yet finished and need some serious upgrading, any feedback is welcome, and you can further colaborate at Github<https://github.com/gui23dib/python-better-prints>
+This package is an experimental package made from a student, it is not yet finished and need some serious upgrading, any feedback is welcome, and you can further colaborate at Github <https://github.com/gui23dib/python-better-prints>
+
+## MOTIVATION
+
+The idea came to me during a class where I was overwhelmed by numerous commented, uncommented, and confusing '𝘱𝘳𝘪𝘯𝘵' statements, not to mention class instances without a proper '__𝘴𝘵𝘳__' method. To solve this, I created 𝗯𝗲𝘁𝘁𝗲𝗿𝗽𝗿𝗶𝗻𝘁𝘀, making debugging much easier and cleaner! Now, it's publicly available with the command: "𝘱𝘪𝘱 𝘪𝘯𝘴𝘵𝘢𝘭𝘭 𝘣𝘦𝘵𝘵𝘦𝘳𝘱𝘳𝘪𝘯𝘵𝘴"
